@@ -1,7 +1,7 @@
 import "./ExploreMenu.css";
 import { menu_list } from "../../assets/assets";
 
-const ExploreMenu = () => {
+const ExploreMenu = ({ category, setCategory }) => {
   return (
     <>
       <div className="explore-menu" id="explore-menu">
@@ -11,15 +11,29 @@ const ExploreMenu = () => {
           satisfy every craving. From hearty main courses and fresh salads to
         </p>
         <div className="explore-menu-list">
-            {menu_list.map((item , index) => {
-                return (
-                    <div>
-                        <img src={item.menu_image} alt="" key={index} className="explore-menu-list-item"/>
-                        <p>{item.menu_name}</p>
-                    </div>
-                )
-            })}
+          {menu_list.map((item, index) => {
+            return (
+              <div
+                className="explore-menu-list-item"
+                onClick={() =>
+                  setCategory((pre) =>
+                    pre === item.menu_name ? "All" : item.menu_name
+                  )
+                }
+              >
+                <img
+                  src={item.menu_image}
+                  alt=""
+                  key={index}
+                  // className="explore-menu-list-item"
+                  className={category === item.menu_name ? "active" : ""}
+                />
+                <p>{item.menu_name}</p>
+              </div>
+            );
+          })}
         </div>
+        <hr />
       </div>
     </>
   );
